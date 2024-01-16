@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href={~p"/assets/css/live_stream.css"} />
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest">
+</script>
+
+<section class="container">
+  <section class="stream">
+    <%= if @live_stream.is_live? do %>
+      <video
+        class="player"
+        id="player"
+        controls
+        webkit-playsinline
+        playsinline
+        autoplay
+        preload
+        class="player"
+      />
+    <% else %>
+      <img class="offline" src={static_path(@socket, "/assets/img/offline.gif")} />
+    <% end %>
+  </section>
+  <section class="chat">
+    <section class="messages">
+      <%= for message <- @chat_messages do %>
+        <div class="message">
+          <p class="message-sender"><%= message["sender"].username %>:</p>
+          <p class="message-content"><%= message["content"] %></p>
+        </div>
+      <% end %>
+    </section>
+    <.simple_form class="chat-form" for={@chat_form} phx-submit="send_message">
+      <section class="chat-input">
+        <.input field={@chat_form[:chat_input]} value={@current_chat_input} type="text" required />
+        <.button>Send</.button>
+      </section>
+    </.simple_form>
+  </section>
+</section>
+
+<script>
+  var video = document.getElementById('player');
+  var videoSrc = window.location.origin + `/api/stream/<%= @user.id %>/<%= @output_file %>`;
+  if (video) {
+    if (Hls.isSupported()) {
+      let hls = new Hls({
+        enableWorker: true,
+        maxBufferLength: 1,
+        liveBackBufferLength: 0,
+        liveSyncDuration: 1,
+        liveMaxLatencyDuration: 5,
+        liveDurationInfinity: true,
+        highBufferWatchdogPeriod: 1,
+      });
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        hls.loadSource(videoSrc);
+      })
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    }
+  }
+</script>

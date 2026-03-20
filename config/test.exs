@@ -30,7 +30,7 @@ config :computer_vision, ComputerVision.Mailer, adapter: Swoosh.Adapters.Test
 config :swoosh, :api_client, false
 
 # Disable RTMP server in test
-config :computer_vision, start_rtmp: false
+config :computer_vision, start_rtmp_server: false
 
 # Print only warnings and errors during test
 config :logger, level: :warning

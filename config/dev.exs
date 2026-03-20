@@ -80,3 +80,8 @@ config :phoenix_live_view, :debug_heex_annotations, true
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+# RTMP server configuration
+config :computer_vision,
+  rtmp_port: 1935,
+  rtmp_host: {0, 0, 0, 0}

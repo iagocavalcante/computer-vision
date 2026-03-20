@@ -115,3 +115,12 @@ feat: add user authentication with phx.gen.auth and custo
 2026-03-20 19:34:16|Edit|priv/repo/migrations/20260320223349_create_emotes_and_chat_bans.exs
 2026-03-20 19:34:26|Bash|mix ecto.migrate 2>&1
 2026-03-20 19:34:34|Bash|mix test test/computer_vision/chat_test.exs 2>&1
+2026-03-20 19:34:44|Bash|git add -A && git commit -m "feat: add emotes and chat bans schemas with chat context"
+2026-03-20 19:34:50|Write|test/computer_vision/admin_test.exs
+2026-03-20 19:34:52|Write|lib/computer_vision/admin/instance_setting.ex
+2026-03-20 19:34:59|Write|lib/computer_vision/admin.ex
+2026-03-20 19:35:08|Bash|mix ecto.gen.migration create_instance_settings 2>&1
+2026-03-20 19:35:12|Edit|lib/computer_vision/admin.ex
+2026-03-20 19:35:18|Read|priv/repo/migrations/20260320223508_create_instance_settings.exs
+2026-03-20 19:35:27|Edit|priv/repo/migrations/20260320223508_create_instance_settings.exs
+2026-03-20 19:35:37|Bash|mix ecto.migrate 2>&1 && mix test test/computer_vision/admin_test.exs 2>&1

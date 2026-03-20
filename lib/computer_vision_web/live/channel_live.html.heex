@@ -1,0 +1,106 @@
+<div class="min-h-screen bg-gray-900 text-white flex flex-col">
+  <header class="border-b border-gray-800 px-4 py-3">
+    <div class="flex items-center justify-between">
+      <.link navigate={~p"/"} class="text-xl font-bold hover:text-purple-400">ComputerVision</.link>
+      <nav class="flex gap-4 items-center">
+        <%= if @current_user do %>
+          <.link navigate={~p"/dashboard"} class="text-gray-300 hover:text-white text-sm">
+            Dashboard
+          </.link>
+        <% end %>
+      </nav>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+    <main class="flex-1 flex flex-col">
+      <div class="aspect-video bg-black relative">
+        <%= if @is_live do %>
+          <video
+            id="player"
+            controls
+            autoplay
+            playsinline
+            class="w-full h-full"
+            phx-hook="HlsPlayer"
+            data-stream-url={"/api/v1/stream/#{@streamer.id}/live.m3u8"}
+          />
+          <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
+            LIVE
+          </span>
+          <span class="absolute top-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded">
+            <%= @viewer_count %> watching
+          </span>
+        <% else %>
+          <div class="w-full h-full flex items-center justify-center text-gray-500">
+            <div class="text-center">
+              <p class="text-4xl mb-2">Offline</p>
+              <p><%= @streamer.username %> is not streaming right now</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="p-4 border-b border-gray-800">
+        <div class="flex items-start justify-between">
+          <div>
+            <h1 class="text-lg font-semibold">
+              <%= if @channel, do: @channel.title || "#{@streamer.username}'s channel", else: "#{@streamer.username}'s channel" %>
+            </h1>
+            <p class="text-gray-400"><%= @streamer.username %></p>
+            <p class="text-sm text-gray-500 mt-1"><%= @follower_count %> followers</p>
+          </div>
+          <%= if @current_user && @current_user.id != @streamer.id do %>
+            <button
+              phx-click="toggle_follow"
+              class={"px-4 py-2 rounded-lg font-semibold text-sm #{if @following, do: "bg-gray-700 hover:bg-gray-600 text-white", else: "bg-purple-600 hover:bg-purple-700 text-white"}"}
+            >
+              <%= if @following, do: "Following", else: "Follow" %>
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </main>
+
+    <aside class="w-80 border-l border-gray-800 flex flex-col">
+      <div class="p-3 border-b border-gray-800">
+        <h2 class="font-semibold text-sm">Stream Chat</h2>
+      </div>
+
+      <div id="chat-messages" class="flex-1 overflow-y-auto p-3 space-y-1">
+        <%= for {message, idx} <- Enum.with_index(@chat_messages) do %>
+          <div id={"msg-#{idx}"} class="text-sm">
+            <span class="font-semibold text-purple-400"><%= message.sender.username %></span>
+            <span class="text-gray-300"><%= message.content %></span>
+          </div>
+        <% end %>
+      </div>
+
+      <%= if @current_user do %>
+        <.form for={@chat_form} phx-submit="send_message" class="p-3 border-t border-gray-800">
+          <div class="flex gap-2">
+            <input
+              type="text"
+              name="chat[message]"
+              placeholder="Send a message"
+              autocomplete="off"
+              class="flex-1 bg-gray-800 border border-gray-700 rounded px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
+            />
+            <button
+              type="submit"
+              class="bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded text-sm font-semibold"
+            >
+              Chat
+            </button>
+          </div>
+        </.form>
+      <% else %>
+        <div class="p-3 border-t border-gray-800 text-center">
+          <.link navigate={~p"/users/log_in"} class="text-purple-400 hover:text-purple-300 text-sm">
+            Log in to chat
+          </.link>
+        </div>
+      <% end %>
+    </aside>
+  </div>
+</div>

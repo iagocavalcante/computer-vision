@@ -11,6 +11,7 @@ defmodule ComputerVision.Streaming.Channel do
     field :viewer_count, :integer, default: 0
     field :thumbnail_url, :string
     field :transcoding_enabled, :boolean, default: false
+    belongs_to :category, ComputerVision.Streaming.Category
     timestamps(type: :utc_datetime)
   end
 
@@ -23,7 +24,8 @@ defmodule ComputerVision.Streaming.Channel do
       :started_at,
       :viewer_count,
       :thumbnail_url,
-      :transcoding_enabled
+      :transcoding_enabled,
+      :category_id
     ])
     |> validate_required([:user_id])
     |> unique_constraint(:user_id)

@@ -1,0 +1,51 @@
+services:
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+      - "1935:1935"
+    environment:
+      - DATABASE_URL=ecto://postgres:postgres@db/computer_vision
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - PHX_HOST=${PHX_HOST:-localhost}
+      - PHX_SERVER=true
+      - RTMP_PORT=1935
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - STORAGE_TYPE=${STORAGE_TYPE:-local}
+      - TRANSCODING_ENABLED=${TRANSCODING_ENABLED:-false}
+      - REGISTRATION_OPEN=${REGISTRATION_OPEN:-true}
+    volumes:
+      - stream_data:/app/output
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=computer_vision
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  pg_data:
+  redis_data:
+  stream_data:

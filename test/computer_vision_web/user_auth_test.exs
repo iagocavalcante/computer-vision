@@ -226,6 +226,35 @@ defmodule ComputerVisionWeb.UserAuthTest do
     end
   end
 
+  describe "require_admin/2" do
+    test "allows admin users", %{conn: conn, user: user} do
+      # The setup user is the first user and gets the admin role
+      assert user.role == "admin"
+      conn = conn |> assign(:current_user, user) |> UserAuth.require_admin([])
+      refute conn.halted
+    end
+
+    test "redirects non-admin users", %{conn: conn} do
+      regular = user_fixture()
+      assert regular.role != "admin"
+
+      conn =
+        conn
+        |> assign(:current_user, regular)
+        |> fetch_flash()
+        |> UserAuth.require_admin([])
+
+      assert conn.halted
+      assert redirected_to(conn) == ~p"/"
+    end
+
+    test "redirects unauthenticated users", %{conn: conn} do
+      conn = conn |> fetch_flash() |> UserAuth.require_admin([])
+      assert conn.halted
+      assert redirected_to(conn) == ~p"/"
+    end
+  end
+
   describe "require_authenticated_user/2" do
     test "redirects if user is not authenticated", %{conn: conn} do
       conn = conn |> fetch_flash() |> UserAuth.require_authenticated_user([])

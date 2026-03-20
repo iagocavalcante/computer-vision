@@ -2,11 +2,10 @@ defmodule ComputerVisionWeb.LiveStreamLive do
   use ComputerVisionWeb, :live_view
 
   alias ComputerVision.LiveStream
-  alias Plug
 
   @output_file Application.compile_env(:computer_vision, :stream_live_file, "live.m3u8")
 
-  def mount(params, session, socket) do
+  def mount(_params, _session, socket) do
     Phoenix.PubSub.subscribe(ComputerVision.PubSub, "live:anom")
 
     {:ok,

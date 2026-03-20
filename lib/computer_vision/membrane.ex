@@ -5,8 +5,6 @@ defmodule ComputerVision.MembraneService do
 
   @impl true
   def handle_init(_context, socket: socket) do
-    IO.inspect("Socket: #{socket}")
-
     structure = [
       child(:src, %SourceBin{socket: socket})
       |> via_out(:audio)

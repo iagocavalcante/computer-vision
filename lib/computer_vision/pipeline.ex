@@ -27,44 +27,44 @@ defmodule ComputerVision.Pipeline do
       |> get_child(:sink)
     ]
 
-    {[spec: structure], %{socket: socket}}
+    {[spec: structure], %{socket: socket, since_level: 0}}
   end
 
   @impl true
-  def handle_notification(
+  def handle_child_notification(
         {:transcribed, %{results: [%{text: text}]}, part, start, stop},
         :transcription,
         _context,
         state
       ) do
     Phoenix.PubSub.broadcast!(
-      Lively.PubSub,
+      ComputerVision.PubSub,
       "transcripts",
       {:transcribed, text, part, start, stop}
     )
 
-    {:ok, state}
+    {[], state}
   end
 
   @impl true
-  def handle_notification(
+  def handle_child_notification(
         {:transcribed, %{results: [%{text: text}]}, part, start, stop},
         :instant_transcription,
         _context,
         state
       ) do
     Phoenix.PubSub.broadcast!(
-      Lively.PubSub,
+      ComputerVision.PubSub,
       "transcripts",
       {:instant, text, part, start, stop}
     )
 
-    {:ok, state}
+    {[], state}
   end
 
   @spacing 20
   @impl true
-  def handle_notification(
+  def handle_child_notification(
         {:amplitudes, amps},
         _element,
         _context,
@@ -75,7 +75,7 @@ defmodule ComputerVision.Pipeline do
     state =
       if now - state.since_level > @spacing do
         Phoenix.PubSub.broadcast!(
-          Lively.PubSub,
+          ComputerVision.PubSub,
           "transcripts",
           {:levels, amps}
         )
@@ -85,14 +85,12 @@ defmodule ComputerVision.Pipeline do
         state
       end
 
-    {:ok, state}
+    {[], state}
   end
 
   @impl true
-  def handle_notification(_notification, _element, _context, state) do
-    # IO.inspect(notification, label: "notification")
-    # IO.inspect(element, label: "element")
-    {:ok, state}
+  def handle_child_notification(_notification, _element, _context, state) do
+    {[], state}
   end
 
   @impl true

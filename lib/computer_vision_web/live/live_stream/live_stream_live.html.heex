@@ -13,7 +13,6 @@
         playsinline
         autoplay
         preload
-        class="player"
       />
     <% else %>
       <img class="offline" src={static_path(@socket, "/assets/img/offline.gif")} />
@@ -39,7 +38,7 @@
 
 <script>
   var video = document.getElementById('player');
-  var videoSrc = window.location.origin + `/api/stream/<%= @user.id %>/<%= @output_file %>`;
+  var videoSrc = window.location.origin + `/api/v1/stream/<%= @user.id %>/<%= @output_file %>`;
   if (video) {
     if (Hls.isSupported()) {
       let hls = new Hls({

@@ -1,8 +1,6 @@
 defmodule ComputerVisionWeb.HlsController do
   use ComputerVisionWeb, :controller
 
-  alias Plug
-
   def index(conn, %{"filename" => filename}) do
     path = "output/#{filename}"
 

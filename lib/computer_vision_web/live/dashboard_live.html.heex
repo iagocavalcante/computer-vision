@@ -1,0 +1,126 @@
+<div class="min-h-screen bg-gray-900 text-white">
+  <header class="border-b border-gray-800 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <.link navigate={~p"/"} class="text-2xl font-bold">ComputerVision</.link>
+      <h2 class="text-lg font-semibold text-gray-300">Streamer Dashboard</h2>
+      <nav class="flex gap-4 items-center">
+        <.link navigate={~p"/"} class="text-gray-300 hover:text-white text-sm">Home</.link>
+        <.link href={~p"/users/log_out"} method="delete" class="text-gray-300 hover:text-white text-sm">Log out</.link>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-4xl mx-auto px-6 py-8 space-y-8">
+    <%!-- Stream Status Section --%>
+    <section class="bg-gray-800 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-4">Stream Status</h3>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2">
+          <%= if @channel.is_live do %>
+            <span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+            <span class="text-red-400 font-semibold">LIVE</span>
+          <% else %>
+            <span class="w-3 h-3 rounded-full bg-gray-500"></span>
+            <span class="text-gray-400">Offline</span>
+          <% end %>
+        </div>
+        <div class="text-gray-400">
+          <span class="text-white font-semibold"><%= @follower_count %></span> followers
+        </div>
+        <%= if @channel.is_live do %>
+          <div class="text-gray-400">
+            <span class="text-white font-semibold"><%= @channel.viewer_count %></span> viewers
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <%!-- Stream Key Section --%>
+    <section class="bg-gray-800 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-4">Stream Key</h3>
+      <p class="text-sm text-gray-400 mb-4">
+        Use this key in your streaming software (OBS, etc.) to connect to the RTMP server.
+      </p>
+      <div class="flex items-center gap-4">
+        <div class="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 font-mono text-sm">
+          <%= if @show_stream_key do %>
+            <span class="text-purple-400"><%= @current_user.stream_key %></span>
+          <% else %>
+            <span class="text-gray-500">••••••••••••••••••••••••••••••••</span>
+          <% end %>
+        </div>
+        <button
+          phx-click="toggle_stream_key"
+          class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-semibold transition"
+        >
+          <%= if @show_stream_key, do: "Hide", else: "Show" %>
+        </button>
+        <button
+          phx-click="regenerate_stream_key"
+          data-confirm="Are you sure? Your current stream key will stop working."
+          class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-semibold transition"
+        >
+          Regenerate
+        </button>
+      </div>
+    </section>
+
+    <%!-- Channel Settings Section --%>
+    <section class="bg-gray-800 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-4">Channel Settings</h3>
+      <.form for={@channel_form} phx-submit="update_channel" class="space-y-4">
+        <div>
+          <label for="channel_title" class="block text-sm font-medium text-gray-300 mb-1">Stream Title</label>
+          <input
+            type="text"
+            id="channel_title"
+            name="channel[title]"
+            value={@channel_form[:title].value}
+            placeholder="What are you streaming today?"
+            class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+
+        <div>
+          <label for="channel_category_id" class="block text-sm font-medium text-gray-300 mb-1">Category</label>
+          <select
+            id="channel_category_id"
+            name="channel[category_id]"
+            class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+          >
+            <option value="">No category</option>
+            <%= for category <- @categories do %>
+              <option value={category.id} selected={@channel.category_id == category.id}>
+                <%= category.name %>
+              </option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input
+            type="checkbox"
+            id="channel_transcoding_enabled"
+            name="channel[transcoding_enabled]"
+            value="true"
+            checked={@channel.transcoding_enabled}
+            class="w-4 h-4 rounded bg-gray-900 border-gray-700 text-purple-600 focus:ring-purple-500"
+          />
+          <label for="channel_transcoding_enabled" class="text-sm text-gray-300">
+            Enable transcoding (multiple quality options for viewers)
+          </label>
+        </div>
+        <input type="hidden" name="channel[transcoding_enabled]" value="false" />
+
+        <div class="pt-2">
+          <button
+            type="submit"
+            class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg text-sm font-semibold transition"
+          >
+            Save Settings
+          </button>
+        </div>
+      </.form>
+    </section>
+  </div>
+</div>

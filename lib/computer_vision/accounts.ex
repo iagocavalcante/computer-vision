@@ -344,6 +344,12 @@ defmodule ComputerVision.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
+  def regenerate_stream_key(user) do
+    user
+    |> User.stream_key_changeset()
+    |> Repo.update()
+  end
+
   def reset_user_password(user, attrs) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, User.password_changeset(user, attrs))

@@ -129,3 +129,32 @@
 2026-03-20 19:57:32|Write|assets/js/hooks/hls_player.js
 2026-03-20 19:57:42|Bash|rm /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/assets/vendor/hls.min.js
 2026-03-20 19:57:47|Bash|mix compile 2>&1
+2026-03-20 19:57:56|Bash|git add -A && git status
+2026-03-20 19:58:07|Bash|git commit -m "feat: add channel viewer page with HLS player, chat, follows, and presence"
+2026-03-20 19:58:25|Agent|
+2026-03-20 19:58:32|TaskUpdate|
+2026-03-20 19:58:32|TaskUpdate|
+2026-03-20 19:59:08|Read|lib/computer_vision_web/router.ex
+2026-03-20 19:59:09|Read|lib/computer_vision/accounts.ex
+2026-03-20 19:59:10|Read|lib/computer_vision_web/user_auth.ex
+2026-03-20 19:59:15|Read|lib/computer_vision/streaming.ex
+2026-03-20 19:59:20|Read|lib/computer_vision/accounts/user.ex
+2026-03-20 19:59:21|Read|lib/computer_vision/streaming/channel.ex
+2026-03-20 19:59:21|Read|lib/computer_vision/streaming/category.ex
+2026-03-20 19:59:22|Grep|Social
+2026-03-20 19:59:27|Grep|Admin
+2026-03-20 19:59:30|Read|lib/computer_vision/social.ex
+2026-03-20 19:59:31|Read|lib/computer_vision/admin.ex
+2026-03-20 19:59:31|Read|lib/computer_vision/admin/instance_setting.ex
+2026-03-20 19:59:37|Glob|lib/computer_vision_web/live/directory_live.*
+2026-03-20 19:59:45|Glob|lib/computer_vision_web/live/*
+2026-03-20 19:59:49|Glob|lib/computer_vision_web/live/**/*
+2026-03-20 19:59:52|Grep|DirectoryLive
+2026-03-20 19:59:57|Read|lib/computer_vision_web/live/directory_live.ex
+2026-03-20 19:59:57|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/live/
+2026-03-20 20:00:06|Read|lib/computer_vision_web/live/directory_live.html.heex
+2026-03-20 20:00:17|Write|lib/computer_vision_web/live/dashboard_live.ex
+2026-03-20 20:00:38|Write|lib/computer_vision_web/live/dashboard_live.html.heex
+2026-03-20 20:00:44|Edit|lib/computer_vision/accounts.ex
+2026-03-20 20:00:46|Edit|lib/computer_vision_web/router.ex
+2026-03-20 20:00:52|Bash|mix compile 2>&1

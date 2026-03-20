@@ -5,14 +5,19 @@ defmodule ComputerVisionWeb.Api.V1.LiveStreamController do
   @output_file Application.compile_env(:computer_vision, :stream_output_file, "index.m3u8")
 
   def stream(conn, %{"user_id" => id, "filename" => filename}) do
-    path = [@output_dir, id, "live", filename] |> Path.join() |> Path.expand()
+    # Reject path traversal
+    if String.contains?(filename, "..") or String.contains?(filename, "/") do
+      conn |> Plug.Conn.send_resp(400, "Invalid filename")
+    else
+      path = [@output_dir, id, "live", filename] |> Path.join() |> Path.expand()
 
-    case File.exists?(path) do
-      true ->
-        conn |> Plug.Conn.send_file(200, path)
+      case File.exists?(path) do
+        true ->
+          conn |> Plug.Conn.send_file(200, path)
 
-      false ->
-        conn |> Plug.Conn.send_resp(404, "File not found")
+        false ->
+          conn |> Plug.Conn.send_resp(404, "File not found")
+      end
     end
   end
 end

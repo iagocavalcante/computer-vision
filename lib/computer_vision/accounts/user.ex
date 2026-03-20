@@ -42,7 +42,7 @@ defmodule ComputerVision.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :username])
+    |> cast(attrs, [:email, :password, :username, :role])
     |> validate_email(opts)
     |> validate_password(opts)
     |> validate_required([:username])

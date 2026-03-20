@@ -500,6 +500,37 @@ defmodule ComputerVision.AccountsTest do
     end
   end
 
+  describe "first user admin" do
+    test "first user becomes admin" do
+      {:ok, user} =
+        Accounts.register_user(%{
+          email: "first@test.com",
+          username: "first",
+          password: "password123456"
+        })
+
+      assert user.role == "admin"
+    end
+
+    test "subsequent users are streamers" do
+      {:ok, _} =
+        Accounts.register_user(%{
+          email: "first@test.com",
+          username: "first",
+          password: "password123456"
+        })
+
+      {:ok, user} =
+        Accounts.register_user(%{
+          email: "second@test.com",
+          username: "second",
+          password: "password123456"
+        })
+
+      assert user.role == "streamer"
+    end
+  end
+
   describe "inspect/2 for the User module" do
     test "does not include password" do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""

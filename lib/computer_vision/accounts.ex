@@ -79,9 +79,18 @@ defmodule ComputerVision.Accounts do
 
   """
   def register_user(attrs) do
+    role = if user_count() == 0, do: "admin", else: "streamer"
+
+    role_key =
+      if is_map_key(attrs, :email) or is_map_key(attrs, :password), do: :role, else: "role"
+
     %User{}
-    |> User.registration_changeset(attrs)
+    |> User.registration_changeset(Map.put(attrs, role_key, role))
     |> Repo.insert()
+  end
+
+  defp user_count do
+    Repo.aggregate(User, :count)
   end
 
   @doc """

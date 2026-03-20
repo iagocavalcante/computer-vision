@@ -1,104 +1,3 @@
-2026-03-20 19:32:50|Read|lib/computer_vision/streaming.ex
-2026-03-20 19:32:50|Read|lib/computer_vision/repo.ex
-2026-03-20 19:32:56|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/priv/repo/migrations/ | tail -5
-2026-03-20 19:33:02|Grep|def register_user
-2026-03-20 19:33:07|Read|test/support/data_case.ex
-2026-03-20 19:33:16|Bash|mkdir -p /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/chat /U
-2026-03-20 19:33:26|Write|test/computer_vision/chat_test.exs
-2026-03-20 19:33:29|Write|lib/computer_vision/chat/emote.ex
-2026-03-20 19:33:32|Write|lib/computer_vision/chat/chat_ban.ex
-2026-03-20 19:33:40|Write|lib/computer_vision/chat.ex
-2026-03-20 19:33:49|Bash|mix ecto.gen.migration create_emotes_and_chat_bans 2>&1
-2026-03-20 19:33:58|Glob|priv/repo/migrations/*create_emotes_and_chat_bans*
-2026-03-20 19:34:06|Read|priv/repo/migrations/20260320223349_create_emotes_and_chat_bans.exs
-2026-03-20 19:34:16|Edit|priv/repo/migrations/20260320223349_create_emotes_and_chat_bans.exs
-2026-03-20 19:34:26|Bash|mix ecto.migrate 2>&1
-2026-03-20 19:34:34|Bash|mix test test/computer_vision/chat_test.exs 2>&1
-2026-03-20 19:34:44|Bash|git add -A && git commit -m "feat: add emotes and chat bans schemas with chat context"
-2026-03-20 19:34:50|Write|test/computer_vision/admin_test.exs
-2026-03-20 19:34:52|Write|lib/computer_vision/admin/instance_setting.ex
-2026-03-20 19:34:59|Write|lib/computer_vision/admin.ex
-2026-03-20 19:35:08|Bash|mix ecto.gen.migration create_instance_settings 2>&1
-2026-03-20 19:35:12|Edit|lib/computer_vision/admin.ex
-2026-03-20 19:35:18|Read|priv/repo/migrations/20260320223508_create_instance_settings.exs
-2026-03-20 19:35:27|Edit|priv/repo/migrations/20260320223508_create_instance_settings.exs
-2026-03-20 19:35:37|Bash|mix ecto.migrate 2>&1 && mix test test/computer_vision/admin_test.exs 2>&1
-2026-03-20 19:43:04|Bash|git stash && mix test 2>&1 | tail -5
-2026-03-20 19:43:23|Bash|git stash drop
-2026-03-20 19:43:31|Read|lib/computer_vision/application.ex
-2026-03-20 19:43:38|Write|lib/computer_vision/application.ex
-2026-03-20 19:43:40|Read|config/test.exs
-2026-03-20 19:43:40|Read|config/runtime.exs
-2026-03-20 19:43:45|Read|config/dev.exs
-2026-03-20 19:43:50|Edit|config/test.exs
-2026-03-20 19:43:52|Edit|config/runtime.exs
-2026-03-20 19:43:58|Edit|config/dev.exs
-2026-03-20 19:44:09|Bash|mix test 2>&1 | tail -20
-2026-03-20 19:44:20|Bash|git add lib/computer_vision/stream_registry.ex lib/computer_vision/rtmp_server.ex lib/computer_visio
-2026-03-20 19:44:29|Bash|git commit -m "refactor: add DynamicSupervisor, StreamRegistry, and RTMPServer GenServer"
-2026-03-20 19:44:45|Agent|
-2026-03-20 19:44:49|TaskUpdate|
-2026-03-20 19:44:54|TaskUpdate|
-2026-03-20 19:45:37|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/
-2026-03-20 19:45:37|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/test/computer_vision/ 2>/dev/null
-2026-03-20 19:45:38|Read|lib/computer_vision/validator.ex
-2026-03-20 19:45:43|Read|lib/computer_vision/accounts.ex
-2026-03-20 19:45:48|Read|lib/computer_vision/streaming.ex
-2026-03-20 19:45:48|Read|lib/computer_vision/accounts/user.ex
-2026-03-20 19:45:54|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/storage/ 2>/d
-2026-03-20 19:46:04|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/test/support/
-2026-03-20 19:46:10|Bash|mkdir -p /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/storage
-2026-03-20 19:46:15|Write|lib/computer_vision/storage.ex
-2026-03-20 19:46:18|Write|lib/computer_vision/storage/local.ex
-2026-03-20 19:46:22|Write|lib/computer_vision/storage/s3.ex
-2026-03-20 19:46:32|Write|test/computer_vision/storage/local_test.exs
-2026-03-20 19:46:37|Bash|mix test test/computer_vision/storage/local_test.exs 2>&1
-2026-03-20 19:46:46|Bash|git add lib/computer_vision/storage.ex lib/computer_vision/storage/local.ex lib/computer_vision/stor
-2026-03-20 19:46:51|Grep|validate_connect
-2026-03-20 19:46:55|Grep|validate_connect
-2026-03-20 19:47:06|Write|lib/computer_vision/validator.ex
-2026-03-20 19:47:12|Read|lib/computer_vision/accounts.ex
-2026-03-20 19:47:21|Edit|lib/computer_vision/accounts.ex
-2026-03-20 19:47:30|Write|test/computer_vision/validator_test.exs
-2026-03-20 19:47:40|Bash|mix test test/computer_vision/validator_test.exs 2>&1
-2026-03-20 19:47:50|Bash|git add lib/computer_vision/validator.ex lib/computer_vision/accounts.ex test/computer_vision/valida
-2026-03-20 19:48:00|Agent|
-2026-03-20 19:48:06|TaskUpdate|
-2026-03-20 19:48:07|TaskUpdate|
-2026-03-20 19:48:12|TaskUpdate|
-2026-03-20 19:48:27|Read|lib/computer_vision/application.ex
-2026-03-20 19:48:28|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/
-2026-03-20 19:48:34|Write|lib/computer_vision_web/presence.ex
-2026-03-20 19:48:35|Edit|lib/computer_vision/application.ex
-2026-03-20 19:48:50|Bash|mix compile 2>&1
-2026-03-20 19:49:05|Bash|git add -A && git commit -m "feat: add Phoenix Presence for viewer tracking"
-2026-03-20 19:49:12|Agent|
-2026-03-20 19:49:16|TaskUpdate|
-2026-03-20 19:49:21|TaskUpdate|
-2026-03-20 19:50:04|Read|lib/computer_vision/streaming.ex
-2026-03-20 19:50:10|Read|lib/computer_vision_web/router.ex
-2026-03-20 19:50:20|Glob|lib/computer_vision_web/live/**/*.ex
-2026-03-20 19:50:28|Glob|lib/computer_vision_web/live/*.ex
-2026-03-20 19:50:37|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/live/
-2026-03-20 19:50:40|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/live/live
-2026-03-20 19:50:44|Edit|lib/computer_vision/streaming.ex
-2026-03-20 19:50:56|Edit|lib/computer_vision/streaming.ex
-2026-03-20 19:51:11|Write|lib/computer_vision_web/live/directory_live.ex
-2026-03-20 19:51:30|Write|lib/computer_vision_web/live/directory_live.html.heex
-2026-03-20 19:51:41|Edit|lib/computer_vision_web/router.ex
-2026-03-20 19:51:52|Bash|mix compile 2>&1
-2026-03-20 19:52:09|Edit|lib/computer_vision_web/router.ex
-2026-03-20 19:52:14|Bash|mix compile 2>&1
-2026-03-20 19:52:36|Read|test/computer_vision_web/controllers/page_controller_test.exs
-2026-03-20 19:52:47|Write|test/computer_vision_web/controllers/page_controller_test.exs
-2026-03-20 19:52:52|Bash|mix test test/computer_vision_web/controllers/page_controller_test.exs 2>&1
-2026-03-20 19:53:03|Bash|git add -A && git commit -m "feat: add homepage directory with live channel grid, search, and catego
-2026-03-20 19:53:14|Agent|
-2026-03-20 19:53:21|TaskUpdate|
-2026-03-20 19:53:26|TaskUpdate|
-2026-03-20 19:54:21|Read|lib/computer_vision_web/router.ex
-2026-03-20 19:54:21|Read|assets/js/app.js
-2026-03-20 19:54:22|Read|lib/computer_vision/accounts.ex
 2026-03-20 19:54:22|Read|lib/computer_vision/social.ex
 2026-03-20 19:54:27|Read|lib/computer_vision/chat.ex
 2026-03-20 19:54:33|Grep|get_channel_by_user
@@ -172,3 +71,31 @@
 2026-03-20 20:02:27|Edit|lib/computer_vision_web/user_auth.ex
 2026-03-20 20:02:39|Edit|lib/computer_vision_web/user_auth.ex
 2026-03-20 20:02:48|Bash|mix compile 2>&1
+2026-03-20 20:02:56|Bash|git add -A && git commit -m "feat: add admin panel with instance settings and category management"
+2026-03-20 20:03:17|Agent|
+2026-03-20 20:03:21|TaskUpdate|
+2026-03-20 20:03:21|TaskUpdate|
+2026-03-20 20:03:26|TaskUpdate|
+2026-03-20 20:04:10|Read|config/runtime.exs
+2026-03-20 20:04:11|Read|lib/computer_vision/accounts.ex
+2026-03-20 20:04:12|Read|lib/computer_vision/accounts/user.ex
+2026-03-20 20:04:49|Read|test/computer_vision/accounts_test.exs
+2026-03-20 20:04:55|Grep|def valid_user_attributes\|def unique_user_email\|def valid_user_password\|def user_fixture
+2026-03-20 20:05:04|Grep|user_fixture|valid_user_attributes|unique_user_email|valid_user_password
+2026-03-20 20:05:13|Read|test/support/fixtures/accounts_fixtures.ex
+2026-03-20 20:05:30|Write|lib/computer_vision/release.ex
+2026-03-20 20:05:44|Write|Dockerfile
+2026-03-20 20:05:56|Write|docker-compose.yml
+2026-03-20 20:06:06|Write|.env.example
+2026-03-20 20:06:13|Write|.dockerignore
+2026-03-20 20:06:17|Bash|git add Dockerfile docker-compose.yml .env.example .dockerignore lib/computer_vision/release.ex && g
+2026-03-20 20:06:34|Write|config/runtime.exs
+2026-03-20 20:06:43|Bash|git add config/runtime.exs && git commit -m "feat: configure runtime.exs for Docker environment vari
+2026-03-20 20:06:53|Edit|lib/computer_vision/accounts/user.ex
+2026-03-20 20:07:01|Edit|lib/computer_vision/accounts.ex
+2026-03-20 20:07:17|Edit|test/computer_vision/accounts_test.exs
+2026-03-20 20:07:36|Read|config/runtime.exs
+2026-03-20 20:07:50|Edit|config/runtime.exs
+2026-03-20 20:08:11|Edit|lib/computer_vision/accounts.ex
+2026-03-20 20:08:22|Bash|mix test test/computer_vision/accounts_test.exs 2>&1
+2026-03-20 20:08:28|Bash|git add config/runtime.exs && git commit -m "fix: extract case expression to variable in runtime.exs

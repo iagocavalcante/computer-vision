@@ -1,13 +1,16 @@
 import Config
 
+# Only in tests, remove the complexity from the password hashing algorithm
+config :bcrypt_elixir, :log_rounds, 1
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :computer_vision, ComputerVision.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "admin",
+  password: "admin",
   hostname: "localhost",
   database: "computer_vision_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
@@ -25,6 +28,9 @@ config :computer_vision, ComputerVision.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+# Disable RTMP server in test
+config :computer_vision, start_rtmp: false
 
 # Print only warnings and errors during test
 config :logger, level: :warning

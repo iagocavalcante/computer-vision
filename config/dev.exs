@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :computer_vision, ComputerVision.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "admin",
+  password: "admin",
   hostname: "localhost",
   database: "computer_vision_dev",
   stacktrace: true,

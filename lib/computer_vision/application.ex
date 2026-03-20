@@ -35,23 +35,32 @@ defmodule ComputerVision.Application do
       end
     }
 
-    children = [
-      %{id: TcpServer, start: {TcpServer, :start_link, [tcp_server_options]}},
-      %{
-        id: ComputerVision.SocketAgent,
-        start: {Agent, :start_link, [fn -> %{} end, [name: ComputerVision.SocketAgent]]}
-      },
-      ComputerVisionWeb.Telemetry,
-      ComputerVision.Repo,
-      {DNSCluster, query: Application.get_env(:computer_vision, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: ComputerVision.PubSub},
-      # Start the Finch HTTP client for sending emails
-      {Finch, name: ComputerVision.Finch},
-      # Start a worker by calling: ComputerVision.Worker.start_link(arg)
-      # {ComputerVision.Worker, arg},
-      # Start to serve requests, typically the last entry
-      ComputerVisionWeb.Endpoint
-    ]
+    rtmp_children =
+      if Application.get_env(:computer_vision, :start_rtmp, true) do
+        [
+          %{id: TcpServer, start: {TcpServer, :start_link, [tcp_server_options]}},
+          %{
+            id: ComputerVision.SocketAgent,
+            start: {Agent, :start_link, [fn -> %{} end, [name: ComputerVision.SocketAgent]]}
+          }
+        ]
+      else
+        []
+      end
+
+    children =
+      [
+        ComputerVisionWeb.Telemetry,
+        ComputerVision.Repo,
+        {DNSCluster, query: Application.get_env(:computer_vision, :dns_cluster_query) || :ignore},
+        {Phoenix.PubSub, name: ComputerVision.PubSub},
+        # Start the Finch HTTP client for sending emails
+        {Finch, name: ComputerVision.Finch},
+        # Start a worker by calling: ComputerVision.Worker.start_link(arg)
+        # {ComputerVision.Worker, arg},
+        # Start to serve requests, typically the last entry
+        ComputerVisionWeb.Endpoint
+      ] ++ rtmp_children
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

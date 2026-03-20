@@ -25,17 +25,20 @@ if config_env() == :prod do
     http: [ip: {0, 0, 0, 0}, port: port],
     secret_key_base: secret_key_base
 
+  storage_backend =
+    case System.get_env("STORAGE_TYPE", "local") do
+      "s3" -> ComputerVision.Storage.S3
+      _ -> ComputerVision.Storage.Local
+    end
+
   config :computer_vision,
     rtmp_port: String.to_integer(System.get_env("RTMP_PORT", "1935")),
     rtmp_host: {0, 0, 0, 0},
-    storage_backend:
-      case System.get_env("STORAGE_TYPE", "local") do
-        "s3" -> ComputerVision.Storage.S3
-        _ -> ComputerVision.Storage.Local
-      end,
+    storage_backend: storage_backend,
     storage_dir: System.get_env("STORAGE_DIR", "output"),
     transcoding_enabled: System.get_env("TRANSCODING_ENABLED", "false") == "true",
-    max_concurrent_transcodes: String.to_integer(System.get_env("MAX_CONCURRENT_TRANSCODES", "2")),
+    max_concurrent_transcodes:
+      String.to_integer(System.get_env("MAX_CONCURRENT_TRANSCODES", "2")),
     registration_open: System.get_env("REGISTRATION_OPEN", "true") == "true"
 
   if System.get_env("STORAGE_TYPE") == "s3" do

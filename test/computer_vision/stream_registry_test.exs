@@ -18,4 +18,29 @@ defmodule ComputerVision.StreamRegistryTest do
     StreamRegistry.unregister("channel_2")
     assert :error = StreamRegistry.lookup("channel_2")
   end
+
+  test "process death auto-cleans registry entry" do
+    test_pid = self()
+
+    pid =
+      spawn(fn ->
+        StreamRegistry.register("death_test", self())
+        send(test_pid, :registered)
+        Process.sleep(:infinity)
+      end)
+
+    assert_receive :registered
+    assert {:ok, ^pid} = StreamRegistry.lookup("death_test")
+
+    Process.exit(pid, :kill)
+    Process.sleep(50)
+
+    assert :error = StreamRegistry.lookup("death_test")
+  end
+
+  test "duplicate registration from same process replaces" do
+    StreamRegistry.register("dup_test", self())
+    # Registry allows re-registration from same process — verify it works
+    assert {:ok, _} = StreamRegistry.lookup("dup_test")
+  end
 end

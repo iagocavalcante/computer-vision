@@ -69,6 +69,55 @@ defmodule ComputerVision.StreamingTest do
     end
   end
 
+  describe "query correctness" do
+    test "list_live_channels returns ordered by viewer_count desc" do
+      user1 = insert_user("u1@test.com", "user1")
+      user2 = insert_user("u2@test.com", "user2")
+      {:ok, c1} = Streaming.create_channel(%{user_id: user1.id, viewer_count: 10})
+      {:ok, c2} = Streaming.create_channel(%{user_id: user2.id, viewer_count: 50})
+      {:ok, _} = Streaming.set_channel_live(c1, true)
+      {:ok, _} = Streaming.set_channel_live(c2, true)
+      [first | _] = Streaming.list_live_channels()
+      assert first.viewer_count == 50
+    end
+
+    test "list_live_channels excludes offline channels" do
+      user = insert_user("offline@test.com", "offlineuser")
+      {:ok, _} = Streaming.create_channel(%{user_id: user.id, is_live: false})
+      assert Streaming.list_live_channels() == []
+    end
+
+    test "search_live_channels is case-insensitive" do
+      user = insert_user("u@test.com", "StreamerBob")
+      {:ok, c} = Streaming.create_channel(%{user_id: user.id, title: "My Cool Stream"})
+      {:ok, _} = Streaming.set_channel_live(c, true)
+      assert length(Streaming.search_live_channels("streamerbob")) == 1
+      assert length(Streaming.search_live_channels("cool stream")) == 1
+    end
+
+    test "search_live_channels returns empty for no matches" do
+      assert Streaming.search_live_channels("nonexistent") == []
+    end
+
+    test "list_live_channels_by_category filters correctly" do
+      user = insert_user("cat@test.com", "catuser")
+      {:ok, cat} = Streaming.create_category(%{name: "Gaming", slug: "gaming"})
+      {:ok, c} = Streaming.create_channel(%{user_id: user.id, category_id: cat.id})
+      {:ok, _} = Streaming.set_channel_live(c, true)
+      assert length(Streaming.list_live_channels_by_category(cat.id)) == 1
+      assert length(Streaming.list_live_channels_by_category(999)) == 0
+    end
+  end
+
+  describe "update_channel/2" do
+    test "updates channel title" do
+      user = insert_user("upd@test.com", "upduser")
+      {:ok, channel} = Streaming.create_channel(%{user_id: user.id, title: "Old"})
+      {:ok, updated} = Streaming.update_channel(channel, %{title: "New Title"})
+      assert updated.title == "New Title"
+    end
+  end
+
   defp insert_user(email \\ "test@example.com", username \\ "testuser") do
     {:ok, user} =
       ComputerVision.Accounts.register_user(%{

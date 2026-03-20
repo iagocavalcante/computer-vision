@@ -51,4 +51,46 @@ defmodule ComputerVision.ChatTest do
     :ok = Chat.unban_user(channel.id, user.id)
     assert Chat.banned?(channel.id, user.id) == false
   end
+
+  test "create_emote rejects duplicate code in same channel", %{channel: channel} do
+    {:ok, _} =
+      Chat.create_emote(%{
+        name: "First",
+        code: ":dup:",
+        image_url: "/a.png",
+        channel_id: channel.id
+      })
+
+    {:error, changeset} =
+      Chat.create_emote(%{
+        name: "Second",
+        code: ":dup:",
+        image_url: "/b.png",
+        channel_id: channel.id
+      })
+
+    assert errors_on(changeset) != %{}
+  end
+
+  test "delete_emote removes the emote", %{channel: channel} do
+    {:ok, emote} =
+      Chat.create_emote(%{
+        name: "Temp",
+        code: ":temp:",
+        image_url: "/t.png",
+        channel_id: channel.id
+      })
+
+    {:ok, _} = Chat.delete_emote(emote)
+    assert Chat.list_emotes(channel.id) |> Enum.find(&(&1.code == ":temp:")) == nil
+  end
+
+  test "expired bans are not active", %{user: user, channel: channel} do
+    past = DateTime.add(DateTime.utc_now(), -3600, :second)
+
+    {:ok, _} =
+      Chat.ban_user(%{channel_id: channel.id, user_id: user.id, expires_at: past})
+
+    assert Chat.banned?(channel.id, user.id) == false
+  end
 end

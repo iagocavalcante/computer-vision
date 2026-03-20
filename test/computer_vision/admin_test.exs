@@ -16,4 +16,8 @@ defmodule ComputerVision.AdminTest do
     Admin.set("site_name", "New Name")
     assert Admin.get("site_name") == "New Name"
   end
+
+  test "get/1 returns nil when no default specified" do
+    assert Admin.get("nonexistent") == nil
+  end
 end

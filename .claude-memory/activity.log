@@ -122,3 +122,35 @@
 2026-03-20 20:21:36|Edit|lib/computer_vision_web/channels/user_socket.ex
 2026-03-20 20:21:37|Edit|lib/computer_vision_web/router.ex
 2026-03-20 20:21:50|Bash|mix test 2>&1
+2026-03-20 20:21:54|Bash|git add -A && git commit -m "chore: remove dead legacy code (CameraChannel, CameraController, PageCo
+2026-03-20 20:22:05|Agent|
+2026-03-20 20:22:11|TaskUpdate|
+2026-03-20 20:22:16|TaskUpdate|
+2026-03-20 20:22:56|Glob|test/**/*_test.exs
+2026-03-20 20:23:01|Glob|lib/computer_vision/{accounts,streaming,chat,social,admin}.ex
+2026-03-20 20:23:04|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/
+2026-03-20 20:23:07|Bash|find /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/test -name "*_test.exs" | sort
+2026-03-20 20:23:07|Bash|find /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision -maxdepth 1
+2026-03-20 20:23:12|Read|test/computer_vision/accounts_test.exs
+2026-03-20 20:23:13|Read|test/computer_vision/streaming_test.exs
+2026-03-20 20:23:13|Read|test/computer_vision/chat_test.exs
+2026-03-20 20:23:14|Read|test/computer_vision/social_test.exs
+2026-03-20 20:23:14|Read|test/computer_vision/admin_test.exs
+2026-03-20 20:23:15|Read|lib/computer_vision/accounts.ex
+2026-03-20 20:23:15|Read|lib/computer_vision/streaming.ex
+2026-03-20 20:23:16|Read|lib/computer_vision/chat.ex
+2026-03-20 20:23:16|Read|lib/computer_vision/social.ex
+2026-03-20 20:23:22|Read|lib/computer_vision/admin.ex
+2026-03-20 20:23:30|Grep|def delete_emote
+2026-03-20 20:23:31|Grep|stream_key_changeset
+2026-03-20 20:23:37|Grep|unique_constraint.*channel_id|unique_index.*emote"
+2026-03-20 20:23:42|Grep|username|validate_format|validate_length.*3
+2026-03-20 20:23:47|Read|test/support/fixtures/accounts_fixtures.ex
+2026-03-20 20:23:53|Read|lib/computer_vision/accounts/user.ex
+2026-03-20 20:24:11|Edit|test/computer_vision/accounts_test.exs
+2026-03-20 20:24:25|Edit|test/computer_vision/streaming_test.exs
+2026-03-20 20:24:36|Edit|test/computer_vision/chat_test.exs
+2026-03-20 20:24:49|Edit|test/computer_vision/social_test.exs
+2026-03-20 20:25:00|Edit|test/computer_vision/admin_test.exs
+2026-03-20 20:25:11|Bash|mix test test/computer_vision/accounts_test.exs test/computer_vision/streaming_test.exs test/compute
+2026-03-20 20:25:18|Bash|mix test 2>&1

@@ -536,4 +536,81 @@ defmodule ComputerVision.AccountsTest do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
+
+  describe "get_user_by_username/1" do
+    test "returns user with valid username" do
+      {:ok, user} =
+        Accounts.register_user(%{
+          email: "test@example.com",
+          username: "testuser",
+          password: "validpassword123"
+        })
+
+      found = Accounts.get_user_by_username("testuser")
+      assert found.id == user.id
+    end
+
+    test "returns nil for non-existent username" do
+      assert Accounts.get_user_by_username("nonexistent") == nil
+    end
+  end
+
+  describe "regenerate_stream_key/1" do
+    test "changes the stream key" do
+      {:ok, user} =
+        Accounts.register_user(%{
+          email: "test@example.com",
+          username: "testuser",
+          password: "validpassword123"
+        })
+
+      old_key = user.stream_key
+      {:ok, updated} = Accounts.regenerate_stream_key(user)
+      assert updated.stream_key != old_key
+    end
+  end
+
+  describe "username validation" do
+    test "rejects username shorter than 3 chars" do
+      result =
+        Accounts.register_user(%{
+          email: "test@example.com",
+          username: "ab",
+          password: "validpassword123"
+        })
+
+      assert {:error, changeset} = result
+      assert "should be at least 3 character(s)" in errors_on(changeset).username
+    end
+
+    test "rejects username with special characters" do
+      result =
+        Accounts.register_user(%{
+          email: "test@example.com",
+          username: "user@name",
+          password: "validpassword123"
+        })
+
+      assert {:error, changeset} = result
+      assert "only letters, numbers, and underscores" in errors_on(changeset).username
+    end
+
+    test "rejects duplicate username" do
+      {:ok, _} =
+        Accounts.register_user(%{
+          email: "first@example.com",
+          username: "taken",
+          password: "validpassword123"
+        })
+
+      {:error, changeset} =
+        Accounts.register_user(%{
+          email: "second@example.com",
+          username: "taken",
+          password: "validpassword123"
+        })
+
+      assert "has already been taken" in errors_on(changeset).username
+    end
+  end
 end

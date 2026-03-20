@@ -66,4 +66,17 @@ defmodule ComputerVision.SocialTest do
     Social.mark_notifications_read(follower.id)
     assert Social.list_unread_notifications(follower.id) == []
   end
+
+  test "follower_count returns 0 for no followers", %{streamer: streamer} do
+    assert Social.follower_count(streamer.id) == 0
+  end
+
+  test "following? returns false when not following", %{follower: follower, streamer: streamer} do
+    assert Social.following?(follower.id, streamer.id) == false
+  end
+
+  test "duplicate follow returns error", %{follower: follower, streamer: streamer} do
+    {:ok, _} = Social.follow_user(follower.id, streamer.id)
+    assert {:error, _} = Social.follow_user(follower.id, streamer.id)
+  end
 end

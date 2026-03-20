@@ -18,6 +18,7 @@ defmodule ComputerVision.Application do
         {DynamicSupervisor, name: ComputerVision.PipelineSupervisor, strategy: :one_for_one},
         rtmp_server_child(),
         ComputerVisionWeb.Presence,
+        ComputerVision.NotificationWorker,
         ComputerVisionWeb.Endpoint
       ]
       |> Enum.reject(&is_nil/1)

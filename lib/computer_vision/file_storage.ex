@@ -15,10 +15,10 @@ defmodule ComputerVision.FileStorage do
 
   alias ComputerVision.LiveStream
 
-  @stream_output_file Application.compile_env(:viewbox, :stream_output_file, "index.m3u8")
-  @stream_live_file Application.compile_env(:viewbox, :stream_live_file, "live.m3u8")
-  @stream_live_dir Application.compile_env(:viewbox, :stream_live_dir, "live")
-  @stream_live_segments_offset Application.compile_env(:viewbox, :stream_live_segments_offset, 4)
+  @stream_output_file Application.compile_env(:computer_vision, :stream_output_file, "index.m3u8")
+  @stream_live_file Application.compile_env(:computer_vision, :stream_live_file, "live.m3u8")
+  @stream_live_dir Application.compile_env(:computer_vision, :stream_live_dir, "live")
+  @stream_live_segments_offset Application.compile_env(:computer_vision, :stream_live_segments_offset, 4)
 
   @impl true
   def init(%__MODULE__{} = config), do: config

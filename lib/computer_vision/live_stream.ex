@@ -2,25 +2,33 @@ defmodule ComputerVision.LiveStream do
   use Membrane.Pipeline
 
   alias ComputerVision.LiveStream
-  alias Membrane.HTTPAdaptiveStream.Sink
   alias Membrane.RTMP.SourceBin
 
-  @enforce_keys ~w()a
+  @enforce_keys []
   @optional_keys ~w(user socket)a
   @default_keys [is_live?: true, viewer_count: 0]
   defstruct @enforce_keys ++ @optional_keys ++ @default_keys
 
   @type t :: %__MODULE__{
           viewer_count: non_neg_integer(),
-          socket: port(),
-          user: Accounts.User.t(),
+          socket: port() | nil,
+          user: map() | nil,
           is_live?: boolean()
         }
 
-  @stream_output_dir Application.compile_env(:viewbox, :stream_output_dir, "output")
-  @stream_output_file Application.compile_env(:viewbox, :stream_output_file, "index.m3u8")
-  @stream_live_dir Application.compile_env(:viewbox, :stream_live_dir, "live")
-  @stream_live_file Application.compile_env(:viewbox, :stream_live_file, "live.m3u8")
+  @stream_output_dir Application.compile_env(:computer_vision, :stream_output_dir, "output")
+  @stream_output_file Application.compile_env(:computer_vision, :stream_output_file, "index.m3u8")
+  @stream_live_dir Application.compile_env(:computer_vision, :stream_live_dir, "live")
+  @stream_live_file Application.compile_env(:computer_vision, :stream_live_file, "live.m3u8")
+
+  def update_live_stream(socket, update_fn) do
+    Agent.get_and_update(ComputerVision.SocketAgent, fn state ->
+      current = Map.get(state, socket, %LiveStream{socket: socket})
+      updates = update_fn.(current)
+      updated = struct(current, updates)
+      {updated, Map.put(state, socket, updated)}
+    end)
+  end
 
   @impl true
   def handle_init(_ctx, socket: socket) do
@@ -43,30 +51,10 @@ defmodule ComputerVision.LiveStream do
       )
       |> get_child(:sink)
     ]
-      # child(:src, %SourceBin{socket: socket}),
-      # |> via_out(:audio)
-      # |> via_in(Pad.ref(:input, :audio),
-      #   options: [encoding: :AAC, segment_duration: Membrane.Time.seconds(4)]
-      # )
-      # |> child(:sink, %Membrane.HTTPAdaptiveStream.SinkBin{
-      #   manifest_module: Membrane.HTTPAdaptiveStream.HLS,
-      #   persist?: true,
-      #   target_window_duration: :infinity,
-      #   mode: :live,
-      #   hls_mode: :muxed_av,
-      #   storage: %Membrane.HTTPAdaptiveStream.Storages.FileStorage{directory: "output"}
-      # }),
-      # get_child(:src)
-      # |> via_out(:video)
-      # |> via_in(Pad.ref(:input, :video),
-      #   options: [encoding: :H264, segment_duration: Membrane.Time.seconds(4)]
-      # )
-      # |> get_child(:sink)
 
     {[spec: spec], %{socket: socket}}
   end
 
-  # Once the source initializes, we grant it the control over the tcp socket
   @impl true
   def handle_child_notification(
         {:socket_control_needed, _socket, _source} = notification,
@@ -79,12 +67,14 @@ defmodule ComputerVision.LiveStream do
     {[], state}
   end
 
+  @impl true
   def handle_child_notification(notification, _child, _ctx, state)
       when notification in [:end_of_stream, :socket_closed, :unexpected_socket_closed] do
     Membrane.Pipeline.terminate(self())
     {[], state}
   end
 
+  @impl true
   def handle_child_notification(_notification, _child, _ctx, state) do
     {[], state}
   end
@@ -105,7 +95,6 @@ defmodule ComputerVision.LiveStream do
     {[], state}
   end
 
-  # The rest of the module is used for self-termination of the pipeline after processing finishes
   @impl true
   def handle_element_end_of_stream(:sink, _pad, _ctx, state) do
     {[terminate: :shutdown], state}

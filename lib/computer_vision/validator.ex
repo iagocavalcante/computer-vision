@@ -26,17 +26,15 @@ defimpl Membrane.RTMP.MessageValidator, for: ComputerVision.Validator do
   defp validate_stream_key(impl, stream_key) do
     [username, stream_key] = String.split(stream_key, "_")
 
-    bin_stream_key = String.to_binary(stream_key)
-
     user = %{id: username, username: username}
 
     case Ecto.UUID.dump(stream_key) do
-      {:ok, ^bin_stream_key} ->
+      {:ok, _bin_stream_key} ->
         LiveStream.update_live_stream(impl.socket, fn _ ->
           %{is_live?: true, user: user}
         end)
 
-        Phoenix.PubSub.broadcast(Viewbox.PubSub, "toasts", {:streamer_went_live, user})
+        Phoenix.PubSub.broadcast(ComputerVision.PubSub, "toasts", {:streamer_went_live, user})
 
         {:ok, "publish stream successful"}
 

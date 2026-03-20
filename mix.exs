@@ -54,7 +54,17 @@ defmodule ComputerVision.MixProject do
       ## Membrane deps
       {:membrane_core, "~> 1.0"},
       {:membrane_rtmp_plugin, "~> 0.20.0"},
-      {:membrane_http_adaptive_stream_plugin, "~> 0.18.0"}
+      {:membrane_http_adaptive_stream_plugin, "~> 0.18.0"},
+      # Rate limiting
+      {:hammer, "~> 6.1"},
+      # Redis for PubSub in production
+      {:redix, "~> 1.2"},
+      # S3 storage (optional)
+      {:ex_aws, "~> 2.4"},
+      {:ex_aws_s3, "~> 2.4"},
+      {:sweet_xml, "~> 0.7"},
+      # Node clustering
+      {:libcluster, "~> 3.3"}
     ]
   end
 

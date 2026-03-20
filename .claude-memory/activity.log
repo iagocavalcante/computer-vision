@@ -131,3 +131,24 @@ docs: update README with project description and s
 2026-03-20 19:21:38|Bash|mix test 2>&1 | tail -15
 2026-03-20 19:21:43|Bash|git status
 2026-03-20 19:21:48|Bash|git log --oneline -5
+2026-03-20 19:21:57|Bash|git add -A && git commit -m "$(cat <<'EOF'
+feat: add user authentication with phx.gen.auth and custo
+2026-03-20 19:22:18|Agent|
+2026-03-20 19:22:23|Bash|grep -n "stream_key\|username\|display_name\|avatar_url\|:role\|:bio" lib/computer_vision/accounts/u
+2026-03-20 19:22:24|Bash|grep -n "stream_key_changeset" lib/computer_vision/accounts/user.ex
+2026-03-20 19:22:40|Bash|mix test 2>&1 | tail -5
+2026-03-20 19:22:48|TaskUpdate|
+2026-03-20 19:22:56|TaskUpdate|
+2026-03-20 19:23:39|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/priv/repo/migrations/
+2026-03-20 19:23:39|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/test/
+2026-03-20 19:23:39|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/accounts/user
+2026-03-20 19:23:47|Write|test/computer_vision/streaming_test.exs
+2026-03-20 19:24:17|Bash|mix test test/computer_vision/streaming_test.exs 2>&1 | tail -20
+2026-03-20 19:25:06|Bash|mix ecto.gen.migration create_channels 2>&1
+2026-03-20 19:25:17|Read|priv/repo/migrations/20260320222440_create_channels.exs
+2026-03-20 19:25:23|Write|priv/repo/migrations/20260320222440_create_channels.exs
+2026-03-20 19:25:29|Bash|mkdir -p /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/streami
+2026-03-20 19:25:42|Write|lib/computer_vision/streaming/channel.ex
+2026-03-20 19:25:47|Write|lib/computer_vision/streaming.ex
+2026-03-20 19:26:01|Bash|mix ecto.migrate 2>&1
+2026-03-20 19:26:16|Bash|mix test test/computer_vision/streaming_test.exs 2>&1

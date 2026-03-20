@@ -172,3 +172,24 @@ feat: add user authentication with phx.gen.auth and custo
 2026-03-20 19:48:34|Write|lib/computer_vision_web/presence.ex
 2026-03-20 19:48:35|Edit|lib/computer_vision/application.ex
 2026-03-20 19:48:50|Bash|mix compile 2>&1
+2026-03-20 19:49:05|Bash|git add -A && git commit -m "feat: add Phoenix Presence for viewer tracking"
+2026-03-20 19:49:12|Agent|
+2026-03-20 19:49:16|TaskUpdate|
+2026-03-20 19:49:21|TaskUpdate|
+2026-03-20 19:50:04|Read|lib/computer_vision/streaming.ex
+2026-03-20 19:50:10|Read|lib/computer_vision_web/router.ex
+2026-03-20 19:50:20|Glob|lib/computer_vision_web/live/**/*.ex
+2026-03-20 19:50:28|Glob|lib/computer_vision_web/live/*.ex
+2026-03-20 19:50:37|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/live/
+2026-03-20 19:50:40|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/live/live
+2026-03-20 19:50:44|Edit|lib/computer_vision/streaming.ex
+2026-03-20 19:50:56|Edit|lib/computer_vision/streaming.ex
+2026-03-20 19:51:11|Write|lib/computer_vision_web/live/directory_live.ex
+2026-03-20 19:51:30|Write|lib/computer_vision_web/live/directory_live.html.heex
+2026-03-20 19:51:41|Edit|lib/computer_vision_web/router.ex
+2026-03-20 19:51:52|Bash|mix compile 2>&1
+2026-03-20 19:52:09|Edit|lib/computer_vision_web/router.ex
+2026-03-20 19:52:14|Bash|mix compile 2>&1
+2026-03-20 19:52:36|Read|test/computer_vision_web/controllers/page_controller_test.exs
+2026-03-20 19:52:47|Write|test/computer_vision_web/controllers/page_controller_test.exs
+2026-03-20 19:52:52|Bash|mix test test/computer_vision_web/controllers/page_controller_test.exs 2>&1

@@ -20,9 +20,13 @@ defmodule ComputerVisionWeb.Router do
   scope "/", ComputerVisionWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
     get "/video/:filename", HlsController, :index
-    live("/live/:username", LiveStreamLive)
+
+    live_session :public,
+      on_mount: [{ComputerVisionWeb.UserAuth, :mount_current_user}] do
+      live "/", DirectoryLive
+      live "/c/:username", ChannelLive
+    end
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,82 @@
+<div class="min-h-screen bg-gray-900 text-white">
+  <header class="border-b border-gray-800 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <h1 class="text-2xl font-bold">ComputerVision</h1>
+      <form phx-change="search" class="flex-1 max-w-md mx-8">
+        <input
+          type="text"
+          name="query"
+          value={@search_query}
+          placeholder="Search streams..."
+          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          phx-debounce="300"
+        />
+      </form>
+      <nav class="flex gap-4 items-center">
+        <%= if @current_user do %>
+          <.link navigate={~p"/dashboard"} class="text-gray-300 hover:text-white text-sm">Dashboard</.link>
+          <.link href={~p"/users/log_out"} method="delete" class="text-gray-300 hover:text-white text-sm">Log out</.link>
+        <% else %>
+          <.link navigate={~p"/users/log_in"} class="text-gray-300 hover:text-white text-sm">Log in</.link>
+          <.link navigate={~p"/users/register"} class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-semibold">Sign up</.link>
+        <% end %>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="flex gap-8">
+      <aside class="w-48 flex-shrink-0">
+        <h2 class="text-sm font-semibold text-gray-400 uppercase mb-3">Categories</h2>
+        <ul class="space-y-1">
+          <li>
+            <button
+              phx-click="filter_category"
+              phx-value-category_id=""
+              class={"block w-full text-left px-3 py-2 rounded-lg text-sm #{if @selected_category == nil, do: "bg-purple-600 text-white", else: "text-gray-300 hover:bg-gray-800"}"}
+            >
+              All
+            </button>
+          </li>
+          <%= for category <- @categories do %>
+            <li>
+              <button
+                phx-click="filter_category"
+                phx-value-category_id={category.id}
+                class={"block w-full text-left px-3 py-2 rounded-lg text-sm #{if @selected_category == category.id, do: "bg-purple-600 text-white", else: "text-gray-300 hover:bg-gray-800"}"}
+              >
+                <%= category.name %>
+              </button>
+            </li>
+          <% end %>
+        </ul>
+      </aside>
+
+      <main class="flex-1">
+        <%= if @channels == [] do %>
+          <div class="text-center py-20 text-gray-500">
+            <p class="text-xl">No one is live right now</p>
+            <p class="mt-2">Check back later or start your own stream!</p>
+          </div>
+        <% else %>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <%= for channel <- @channels do %>
+              <.link navigate={~p"/c/#{channel.user.username}"} class="group">
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-purple-500 transition">
+                  <div class="aspect-video bg-gray-700 relative">
+                    <span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">LIVE</span>
+                    <span class="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded"><%= channel.viewer_count %> viewers</span>
+                  </div>
+                  <div class="p-3">
+                    <p class="font-semibold truncate"><%= channel.title || "Untitled Stream" %></p>
+                    <p class="text-sm text-gray-400"><%= channel.user.username %></p>
+                  </div>
+                </div>
+              </.link>
+            <% end %>
+          </div>
+        <% end %>
+      </main>
+    </div>
+  </div>
+</div>

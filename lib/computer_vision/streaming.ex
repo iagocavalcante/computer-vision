@@ -24,7 +24,7 @@ defmodule ComputerVision.Streaming do
     from(c in Channel,
       where: c.is_live == true,
       order_by: [desc: c.viewer_count],
-      preload: [:user]
+      preload: [:user, :category]
     )
     |> Repo.all()
   end
@@ -44,4 +44,26 @@ defmodule ComputerVision.Streaming do
   end
 
   def get_category!(id), do: Repo.get!(Category, id)
+
+  def list_live_channels_by_category(category_id) do
+    from(c in Channel,
+      where: c.is_live == true and c.category_id == ^category_id,
+      order_by: [desc: c.viewer_count],
+      preload: [:user, :category]
+    )
+    |> Repo.all()
+  end
+
+  def search_live_channels(query) do
+    search = "%#{query}%"
+
+    from(c in Channel,
+      join: u in assoc(c, :user),
+      where: c.is_live == true,
+      where: ilike(u.username, ^search) or ilike(c.title, ^search),
+      order_by: [desc: c.viewer_count],
+      preload: [:user, :category]
+    )
+    |> Repo.all()
+  end
 end

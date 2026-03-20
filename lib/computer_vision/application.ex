@@ -17,6 +17,7 @@ defmodule ComputerVision.Application do
         ComputerVision.StreamRegistry,
         {DynamicSupervisor, name: ComputerVision.PipelineSupervisor, strategy: :one_for_one},
         rtmp_server_child(),
+        ComputerVisionWeb.Presence,
         ComputerVisionWeb.Endpoint
       ]
       |> Enum.reject(&is_nil/1)

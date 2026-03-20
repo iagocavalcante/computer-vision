@@ -124,3 +124,51 @@ feat: add user authentication with phx.gen.auth and custo
 2026-03-20 19:35:18|Read|priv/repo/migrations/20260320223508_create_instance_settings.exs
 2026-03-20 19:35:27|Edit|priv/repo/migrations/20260320223508_create_instance_settings.exs
 2026-03-20 19:35:37|Bash|mix ecto.migrate 2>&1 && mix test test/computer_vision/admin_test.exs 2>&1
+2026-03-20 19:43:04|Bash|git stash && mix test 2>&1 | tail -5
+2026-03-20 19:43:23|Bash|git stash drop
+2026-03-20 19:43:31|Read|lib/computer_vision/application.ex
+2026-03-20 19:43:38|Write|lib/computer_vision/application.ex
+2026-03-20 19:43:40|Read|config/test.exs
+2026-03-20 19:43:40|Read|config/runtime.exs
+2026-03-20 19:43:45|Read|config/dev.exs
+2026-03-20 19:43:50|Edit|config/test.exs
+2026-03-20 19:43:52|Edit|config/runtime.exs
+2026-03-20 19:43:58|Edit|config/dev.exs
+2026-03-20 19:44:09|Bash|mix test 2>&1 | tail -20
+2026-03-20 19:44:20|Bash|git add lib/computer_vision/stream_registry.ex lib/computer_vision/rtmp_server.ex lib/computer_visio
+2026-03-20 19:44:29|Bash|git commit -m "refactor: add DynamicSupervisor, StreamRegistry, and RTMPServer GenServer"
+2026-03-20 19:44:45|Agent|
+2026-03-20 19:44:49|TaskUpdate|
+2026-03-20 19:44:54|TaskUpdate|
+2026-03-20 19:45:37|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/
+2026-03-20 19:45:37|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/test/computer_vision/ 2>/dev/null
+2026-03-20 19:45:38|Read|lib/computer_vision/validator.ex
+2026-03-20 19:45:43|Read|lib/computer_vision/accounts.ex
+2026-03-20 19:45:48|Read|lib/computer_vision/streaming.ex
+2026-03-20 19:45:48|Read|lib/computer_vision/accounts/user.ex
+2026-03-20 19:45:54|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/storage/ 2>/d
+2026-03-20 19:46:04|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/test/support/
+2026-03-20 19:46:10|Bash|mkdir -p /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/storage
+2026-03-20 19:46:15|Write|lib/computer_vision/storage.ex
+2026-03-20 19:46:18|Write|lib/computer_vision/storage/local.ex
+2026-03-20 19:46:22|Write|lib/computer_vision/storage/s3.ex
+2026-03-20 19:46:32|Write|test/computer_vision/storage/local_test.exs
+2026-03-20 19:46:37|Bash|mix test test/computer_vision/storage/local_test.exs 2>&1
+2026-03-20 19:46:46|Bash|git add lib/computer_vision/storage.ex lib/computer_vision/storage/local.ex lib/computer_vision/stor
+2026-03-20 19:46:51|Grep|validate_connect
+2026-03-20 19:46:55|Grep|validate_connect
+2026-03-20 19:47:06|Write|lib/computer_vision/validator.ex
+2026-03-20 19:47:12|Read|lib/computer_vision/accounts.ex
+2026-03-20 19:47:21|Edit|lib/computer_vision/accounts.ex
+2026-03-20 19:47:30|Write|test/computer_vision/validator_test.exs
+2026-03-20 19:47:40|Bash|mix test test/computer_vision/validator_test.exs 2>&1
+2026-03-20 19:47:50|Bash|git add lib/computer_vision/validator.ex lib/computer_vision/accounts.ex test/computer_vision/valida
+2026-03-20 19:48:00|Agent|
+2026-03-20 19:48:06|TaskUpdate|
+2026-03-20 19:48:07|TaskUpdate|
+2026-03-20 19:48:12|TaskUpdate|
+2026-03-20 19:48:27|Read|lib/computer_vision/application.ex
+2026-03-20 19:48:28|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/
+2026-03-20 19:48:34|Write|lib/computer_vision_web/presence.ex
+2026-03-20 19:48:35|Edit|lib/computer_vision/application.ex
+2026-03-20 19:48:50|Bash|mix compile 2>&1

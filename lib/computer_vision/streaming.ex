@@ -54,6 +54,14 @@ defmodule ComputerVision.Streaming do
     |> Repo.all()
   end
 
+  def delete_category(%Category{} = category) do
+    Repo.delete(category)
+  end
+
+  def update_category(%Category{} = category, attrs) do
+    category |> Category.changeset(attrs) |> Repo.update()
+  end
+
   def search_live_channels(query) do
     search = "%#{query}%"
 

@@ -172,6 +172,16 @@ defmodule ComputerVisionWeb.UserAuth do
     end
   end
 
+  def on_mount(:require_admin, _params, session, socket) do
+    socket = mount_current_user(socket, session)
+
+    if socket.assigns[:current_user] && socket.assigns.current_user.role == "admin" do
+      {:cont, socket}
+    else
+      {:halt, Phoenix.LiveView.redirect(socket, to: ~p"/")}
+    end
+  end
+
   defp mount_current_user(socket, session) do
     Phoenix.Component.assign_new(socket, :current_user, fn ->
       if user_token = session["user_token"] do
@@ -222,6 +232,17 @@ defmodule ComputerVisionWeb.UserAuth do
   end
 
   defp maybe_store_return_to(conn), do: conn
+
+  def require_admin(conn, _opts) do
+    if conn.assigns[:current_user] && conn.assigns.current_user.role == "admin" do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be an admin to access this page.")
+      |> redirect(to: ~p"/")
+      |> halt()
+    end
+  end
 
   defp signed_in_path(_conn), do: ~p"/"
 end

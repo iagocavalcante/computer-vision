@@ -83,6 +83,16 @@ defmodule ComputerVisionWeb.Router do
     end
   end
 
+  live_session :admin,
+    on_mount: [{ComputerVisionWeb.UserAuth, :require_admin}] do
+    scope "/admin", ComputerVisionWeb.Admin do
+      pipe_through [:browser, :require_authenticated_user]
+
+      live "/", AdminLive
+      live "/categories", CategoriesLive
+    end
+  end
+
   scope "/", ComputerVisionWeb do
     pipe_through [:browser]
 

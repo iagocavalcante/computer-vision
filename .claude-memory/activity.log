@@ -158,3 +158,17 @@
 2026-03-20 20:00:44|Edit|lib/computer_vision/accounts.ex
 2026-03-20 20:00:46|Edit|lib/computer_vision_web/router.ex
 2026-03-20 20:00:52|Bash|mix compile 2>&1
+2026-03-20 20:00:56|Bash|git add -A && git commit -m "feat: add streamer dashboard with stream key, channel settings, and sta
+2026-03-20 20:01:00|Bash|mkdir -p /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/liv
+2026-03-20 20:01:09|Write|lib/computer_vision_web/live/admin/admin_live.ex
+2026-03-20 20:01:18|Write|lib/computer_vision_web/live/admin/admin_live.html.heex
+2026-03-20 20:01:23|Write|lib/computer_vision_web/live/admin/categories_live.ex
+2026-03-20 20:01:37|Write|lib/computer_vision_web/live/admin/categories_live.html.heex
+2026-03-20 20:01:45|Edit|lib/computer_vision_web/user_auth.ex
+2026-03-20 20:01:48|Edit|lib/computer_vision_web/router.ex
+2026-03-20 20:01:54|Edit|lib/computer_vision/streaming.ex
+2026-03-20 20:02:05|Bash|mix compile 2>&1
+2026-03-20 20:02:15|Read|lib/computer_vision_web/user_auth.ex
+2026-03-20 20:02:27|Edit|lib/computer_vision_web/user_auth.ex
+2026-03-20 20:02:39|Edit|lib/computer_vision_web/user_auth.ex
+2026-03-20 20:02:48|Bash|mix compile 2>&1

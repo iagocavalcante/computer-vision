@@ -1,0 +1,77 @@
+<div class="min-h-screen bg-gray-900 text-white">
+  <header class="border-b border-gray-800 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <.link navigate={~p"/"} class="text-2xl font-bold">ComputerVision</.link>
+      <h2 class="text-lg font-semibold text-gray-300">Category Management</h2>
+      <nav class="flex gap-4 items-center">
+        <.link navigate={~p"/admin"} class="text-gray-300 hover:text-white text-sm">Settings</.link>
+        <.link navigate={~p"/dashboard"} class="text-gray-300 hover:text-white text-sm">Dashboard</.link>
+        <.link navigate={~p"/"} class="text-gray-300 hover:text-white text-sm">Home</.link>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-4xl mx-auto px-6 py-8 space-y-8">
+    <%!-- Add Category Form --%>
+    <section class="bg-gray-800 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-4">Add Category</h3>
+      <.form for={@category_form} phx-submit="add_category" class="flex gap-4 items-end">
+        <div class="flex-1">
+          <label for="category_name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+          <input
+            type="text"
+            id="category_name"
+            name="category[name]"
+            value={@category_form[:name].value}
+            placeholder="Category name"
+            class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+        <div class="flex-1">
+          <label for="category_slug" class="block text-sm font-medium text-gray-300 mb-1">Slug</label>
+          <input
+            type="text"
+            id="category_slug"
+            name="category[slug]"
+            value={@category_form[:slug].value}
+            placeholder="category-slug"
+            class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap"
+        >
+          Add Category
+        </button>
+      </.form>
+    </section>
+
+    <%!-- Category List --%>
+    <section class="bg-gray-800 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-4">Categories</h3>
+      <%= if @categories == [] do %>
+        <p class="text-gray-500">No categories yet.</p>
+      <% else %>
+        <div class="space-y-2">
+          <%= for category <- @categories do %>
+            <div class="flex items-center justify-between bg-gray-900 rounded-lg px-4 py-3">
+              <div>
+                <span class="font-semibold"><%= category.name %></span>
+                <span class="text-gray-500 text-sm ml-2">/<%= category.slug %></span>
+              </div>
+              <button
+                phx-click="delete_category"
+                phx-value-id={category.id}
+                data-confirm={"Delete category \"#{category.name}\"?"}
+                class="text-red-400 hover:text-red-300 text-sm font-semibold transition"
+              >
+                Delete
+              </button>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  </div>
+</div>

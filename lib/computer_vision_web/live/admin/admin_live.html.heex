@@ -1,0 +1,82 @@
+<div class="min-h-screen bg-gray-900 text-white">
+  <header class="border-b border-gray-800 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <.link navigate={~p"/"} class="text-2xl font-bold">ComputerVision</.link>
+      <h2 class="text-lg font-semibold text-gray-300">Admin Panel</h2>
+      <nav class="flex gap-4 items-center">
+        <.link navigate={~p"/admin/categories"} class="text-gray-300 hover:text-white text-sm">Categories</.link>
+        <.link navigate={~p"/dashboard"} class="text-gray-300 hover:text-white text-sm">Dashboard</.link>
+        <.link navigate={~p"/"} class="text-gray-300 hover:text-white text-sm">Home</.link>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-4xl mx-auto px-6 py-8">
+    <section class="bg-gray-800 rounded-lg p-6">
+      <h3 class="text-lg font-semibold mb-6">Instance Settings</h3>
+      <form phx-submit="save_settings" class="space-y-6">
+        <div>
+          <label for="settings_site_name" class="block text-sm font-medium text-gray-300 mb-1">Site Name</label>
+          <input
+            type="text"
+            id="settings_site_name"
+            name="settings[site_name]"
+            value={@site_name}
+            class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input
+            type="checkbox"
+            id="settings_registration_open"
+            name="settings[registration_open]"
+            value="true"
+            checked={@registration_open == "true"}
+            class="w-4 h-4 rounded bg-gray-900 border-gray-700 text-purple-600 focus:ring-purple-500"
+          />
+          <label for="settings_registration_open" class="text-sm text-gray-300">
+            Registration open
+          </label>
+        </div>
+
+        <div>
+          <label for="settings_max_concurrent_transcodes" class="block text-sm font-medium text-gray-300 mb-1">
+            Max Concurrent Transcodes
+          </label>
+          <input
+            type="number"
+            id="settings_max_concurrent_transcodes"
+            name="settings[max_concurrent_transcodes]"
+            value={@max_concurrent_transcodes}
+            min="0"
+            class="w-32 bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input
+            type="checkbox"
+            id="settings_transcoding_enabled_default"
+            name="settings[transcoding_enabled_default]"
+            value="true"
+            checked={@transcoding_enabled_default == "true"}
+            class="w-4 h-4 rounded bg-gray-900 border-gray-700 text-purple-600 focus:ring-purple-500"
+          />
+          <label for="settings_transcoding_enabled_default" class="text-sm text-gray-300">
+            Transcoding enabled by default for new channels
+          </label>
+        </div>
+
+        <div class="pt-2">
+          <button
+            type="submit"
+            class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg text-sm font-semibold transition"
+          >
+            Save Settings
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

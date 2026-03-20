@@ -34,7 +34,6 @@ defmodule ComputerVisionWeb.Router do
     pipe_through :api
 
     scope "/v1", Api.V1, as: :v1 do
-      resources "/camera", CameraController, only: [:index]
       get("/stream/:user_id/:filename", LiveStreamController, :stream)
     end
   end

@@ -1,4 +1,4 @@
-defmodule ComputerVisionWeb.LiveStreamController do
+defmodule ComputerVisionWeb.Api.V1.LiveStreamController do
   use ComputerVisionWeb, :controller
 
   @output_dir Application.compile_env(:computer_vision, :stream_output_dir, "output")

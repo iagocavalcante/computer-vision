@@ -1,104 +1,3 @@
-2026-03-20 17:07:14|Bash|cd /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision && git branch --show-current
-2026-03-20 17:07:29|Bash|git status
-2026-03-20 17:07:30|Bash|git diff
-2026-03-20 17:07:30|Bash|git log -5 --oneline
-2026-03-20 17:10:14|Bash|git add lib/computer_vision/file_storage.ex lib/computer_vision/live_stream.ex lib/computer_vision/v
-2026-03-20 17:10:21|Bash|git add lib/computer_vision_web/controllers/api/v1/live_strean_controller.ex lib/computer_vision_web
-2026-03-20 17:10:26|Bash|git add lib/computer_vision/membrane.ex lib/computer_vision/pipeline.ex lib/computer_vision_web/cont
-2026-03-20 17:10:29|Bash|git add README.md && git commit -m "$(cat <<'EOF'
-docs: update README with project description and s
-2026-03-20 17:10:44|Bash|git log --oneline -4 && echo "---" && git status
-2026-03-20 17:12:43|Skill|
-2026-03-20 17:12:48|Bash|git log --oneline -10
-2026-03-20 17:12:48|Bash|cat mix.exs
-2026-03-20 18:51:43|Write|/Users/iagocavalcante/.claude/projects/-Users-iagocavalcante-Workspaces-IagoCavalcante/memory/feedback_elixir_skills.md
-2026-03-20 18:52:01|Write|/Users/iagocavalcante/.claude/projects/-Users-iagocavalcante-Workspaces-IagoCavalcante/memory/MEMORY.md
-2026-03-20 18:53:40|Bash|mkdir -p /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/docs/plans
-2026-03-20 18:54:14|Write|docs/plans/2026-03-20-streaming-platform-design.md
-2026-03-20 18:56:19|Skill|
-2026-03-20 18:56:38|Read|docs/plans/2026-03-20-streaming-platform-design.md
-2026-03-20 18:56:38|Read|mix.exs
-2026-03-20 18:56:38|Read|lib/computer_vision/application.ex
-2026-03-20 18:56:43|Read|lib/computer_vision_web/router.ex
-2026-03-20 18:56:45|Read|lib/computer_vision/live_stream.ex
-2026-03-20 18:56:45|Read|config/config.exs
-2026-03-20 18:56:46|Read|config/dev.exs
-2026-03-20 18:56:51|Read|config/runtime.exs
-2026-03-20 18:56:53|Glob|lib/computer_vision/**/*.ex
-2026-03-20 18:56:57|Glob|priv/repo/migrations/*.exs
-2026-03-20 18:56:59|Bash|find /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/priv -type f | head -20
-2026-03-20 18:56:59|Bash|find /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision -type f -na
-2026-03-20 18:57:04|Bash|ls -la /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/
-2026-03-20 18:57:09|Read|lib/computer_vision/repo.ex
-2026-03-20 18:57:09|Read|lib/computer_vision/validator.ex
-2026-03-20 18:57:14|Read|lib/computer_vision/pipeline.ex
-2026-03-20 18:57:16|Bash|ls -la /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/priv/repo/
-2026-03-20 18:57:21|Bash|find /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision -name "*schema*" -o -name "*con
-2026-03-20 18:57:22|Bash|ls -la /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web/
-2026-03-20 18:57:28|Bash|find /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision_web -type f
-2026-03-20 18:57:29|Read|lib/computer_vision_web/live/live_stream/live_stream_live.ex
-2026-03-20 18:57:30|Read|lib/computer_vision_web/controllers/hls_controller.ex
-2026-03-20 18:57:35|Read|lib/computer_vision_web/controllers/page_controller.ex
-2026-03-20 18:58:33|Agent|
-2026-03-20 19:03:15|Write|docs/plans/2026-03-20-streaming-platform-implementation.md
-2026-03-20 19:03:26|Bash|git add docs/plans/ && git commit -m "docs: add streaming platform design and implementation plan"
-2026-03-20 19:04:31|Skill|
-2026-03-20 19:04:52|Read|/Users/iagocavalcante/.claude/plugins/cache/superpowers-marketplace/superpowers/4.0.0/skills/subagent-driven-development/implementer-prompt.md
-2026-03-20 19:04:52|Read|/Users/iagocavalcante/.claude/plugins/cache/superpowers-marketplace/superpowers/4.0.0/skills/subagent-driven-development/spec-reviewer-prompt.md
-2026-03-20 19:04:52|Read|/Users/iagocavalcante/.claude/plugins/cache/superpowers-marketplace/superpowers/4.0.0/skills/subagent-driven-development/code-quality-reviewer-prompt.md
-2026-03-20 19:05:01|ToolSearch|
-2026-03-20 19:05:06|TaskCreate|
-2026-03-20 19:05:07|TaskCreate|
-2026-03-20 19:05:12|TaskCreate|
-2026-03-20 19:05:13|TaskCreate|
-2026-03-20 19:05:13|TaskCreate|
-2026-03-20 19:05:13|TaskCreate|
-2026-03-20 19:05:13|TaskCreate|
-2026-03-20 19:05:14|TaskCreate|
-2026-03-20 19:05:15|TaskCreate|
-2026-03-20 19:05:17|TaskCreate|
-2026-03-20 19:05:18|TaskCreate|
-2026-03-20 19:05:20|TaskCreate|
-2026-03-20 19:05:21|TaskCreate|
-2026-03-20 19:05:22|TaskCreate|
-2026-03-20 19:05:23|TaskCreate|
-2026-03-20 19:05:25|TaskCreate|
-2026-03-20 19:05:26|TaskCreate|
-2026-03-20 19:05:27|TaskCreate|
-2026-03-20 19:05:28|TaskCreate|
-2026-03-20 19:05:30|TaskCreate|
-2026-03-20 19:05:34|Bash|git rev-parse HEAD
-2026-03-20 19:05:39|TaskUpdate|
-2026-03-20 19:06:04|Read|mix.exs
-2026-03-20 19:06:14|Edit|mix.exs
-2026-03-20 19:06:29|Bash|mix deps.get
-2026-03-20 19:06:38|Bash|git add mix.exs mix.lock && git commit -m "chore: add hammer, redix, ex_aws, libcluster dependencies
-2026-03-20 19:06:47|Agent|
-2026-03-20 19:06:51|TaskUpdate|
-2026-03-20 19:06:57|TaskUpdate|
-2026-03-20 19:07:21|Bash|ls lib/computer_vision/ lib/computer_vision_web/
-2026-03-20 19:07:26|Bash|cat mix.exs | head -40
-2026-03-20 19:09:15|Bash|echo "y" | mix phx.gen.auth Accounts User users 2>&1 | tail -50
-2026-03-20 19:09:26|Bash|mix deps.compile numbers --force 2>&1 | tail -20
-2026-03-20 19:09:36|Bash|mix deps.update numbers coerce 2>&1 | tail -20
-2026-03-20 19:10:18|Bash|mix deps.compile --force 2>&1 | tail -20
-2026-03-20 19:10:28|Bash|echo "y" | mix phx.gen.auth Accounts User users 2>&1 | tail -60
-2026-03-20 19:10:39|Bash|mix deps.get 2>&1 | tail -10
-2026-03-20 19:10:42|Glob|priv/repo/migrations/*_create_users_auth_tables.exs
-2026-03-20 19:10:48|Read|lib/computer_vision/accounts/user.ex
-2026-03-20 19:10:56|Glob|priv/repo/migrations/*create_users*
-2026-03-20 19:11:04|Bash|ls priv/repo/migrations/
-2026-03-20 19:11:12|Read|priv/repo/migrations/20260320221028_create_users_auth_tables.exs
-2026-03-20 19:11:20|Edit|priv/repo/migrations/20260320221028_create_users_auth_tables.exs
-2026-03-20 19:11:26|Edit|lib/computer_vision/accounts/user.ex
-2026-03-20 19:11:33|Edit|lib/computer_vision/accounts/user.ex
-2026-03-20 19:11:48|Read|lib/computer_vision/accounts/user.ex
-2026-03-20 19:11:57|Edit|lib/computer_vision/accounts/user.ex
-2026-03-20 19:12:11|Bash|mix ecto.migrate 2>&1 | tail -20
-2026-03-20 19:15:45|Bash|brew services list 2>&1 | grep -i post; docker ps 2>&1 | grep -i post
-2026-03-20 19:15:53|Bash|docker ps 2>&1
-2026-03-20 19:16:02|Grep|hostname|username|password|database
-2026-03-20 19:16:16|Glob|**/docker-compose*
 2026-03-20 19:16:31|Bash|docker exec db env 2>&1 | grep POSTGRES
 2026-03-20 19:16:40|Read|config/dev.exs
 2026-03-20 19:16:44|Edit|config/dev.exs
@@ -171,3 +70,48 @@ feat: add user authentication with phx.gen.auth and custo
 2026-03-20 19:28:24|Write|priv/repo/migrations/20260320222806_create_categories.exs
 2026-03-20 19:28:33|Bash|mix ecto.migrate 2>&1
 2026-03-20 19:28:42|Bash|mix test test/computer_vision/streaming_test.exs 2>&1
+2026-03-20 19:28:51|Bash|git add -A && git commit -m "feat: add categories schema with subcategory support"
+2026-03-20 19:29:04|Agent|
+2026-03-20 19:29:07|TaskUpdate|
+2026-03-20 19:29:12|TaskUpdate|
+2026-03-20 19:29:48|Read|lib/computer_vision/accounts/user.ex
+2026-03-20 19:29:48|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/priv/repo/migrations/
+2026-03-20 19:29:54|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/
+2026-03-20 19:30:06|Write|test/computer_vision/social_test.exs
+2026-03-20 19:30:09|Write|lib/computer_vision/social/follow.ex
+2026-03-20 19:30:11|Write|lib/computer_vision/social/notification.ex
+2026-03-20 19:30:20|Write|lib/computer_vision/social.ex
+2026-03-20 19:30:30|Bash|mix ecto.gen.migration create_follows
+2026-03-20 19:30:38|Bash|mix ecto.gen.migration create_notifications
+2026-03-20 19:30:42|Glob|priv/repo/migrations/*_create_follows.exs
+2026-03-20 19:30:47|Glob|priv/repo/migrations/*_create_notifications.exs
+2026-03-20 19:30:50|Glob|**/migrations/*_create_follows.exs
+2026-03-20 19:30:55|Glob|**/migrations/*_create_notifications.exs
+2026-03-20 19:31:09|Read|priv/repo/migrations/20260320223030_create_follows.exs
+2026-03-20 19:31:14|Read|priv/repo/migrations/20260320223038_create_notifications.exs
+2026-03-20 19:31:19|Write|priv/repo/migrations/20260320223030_create_follows.exs
+2026-03-20 19:31:26|Write|priv/repo/migrations/20260320223038_create_notifications.exs
+2026-03-20 19:31:36|Bash|mix ecto.migrate
+2026-03-20 19:31:45|Bash|mix test test/computer_vision/social_test.exs
+2026-03-20 19:31:54|Bash|git add lib/computer_vision/social.ex lib/computer_vision/social/follow.ex lib/computer_vision/socia
+2026-03-20 19:32:09|Agent|
+2026-03-20 19:32:12|TaskUpdate|
+2026-03-20 19:32:18|TaskUpdate|
+2026-03-20 19:32:50|Read|lib/computer_vision/streaming/channel.ex
+2026-03-20 19:32:50|Read|lib/computer_vision/accounts/user.ex
+2026-03-20 19:32:50|Read|lib/computer_vision/streaming.ex
+2026-03-20 19:32:50|Read|lib/computer_vision/repo.ex
+2026-03-20 19:32:56|Bash|ls /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/priv/repo/migrations/ | tail -5
+2026-03-20 19:33:02|Grep|def register_user
+2026-03-20 19:33:07|Read|test/support/data_case.ex
+2026-03-20 19:33:16|Bash|mkdir -p /Users/iagocavalcante/Workspaces/IagoCavalcante/computer-vision/lib/computer_vision/chat /U
+2026-03-20 19:33:26|Write|test/computer_vision/chat_test.exs
+2026-03-20 19:33:29|Write|lib/computer_vision/chat/emote.ex
+2026-03-20 19:33:32|Write|lib/computer_vision/chat/chat_ban.ex
+2026-03-20 19:33:40|Write|lib/computer_vision/chat.ex
+2026-03-20 19:33:49|Bash|mix ecto.gen.migration create_emotes_and_chat_bans 2>&1
+2026-03-20 19:33:58|Glob|priv/repo/migrations/*create_emotes_and_chat_bans*
+2026-03-20 19:34:06|Read|priv/repo/migrations/20260320223349_create_emotes_and_chat_bans.exs
+2026-03-20 19:34:16|Edit|priv/repo/migrations/20260320223349_create_emotes_and_chat_bans.exs
+2026-03-20 19:34:26|Bash|mix ecto.migrate 2>&1
+2026-03-20 19:34:34|Bash|mix test test/computer_vision/chat_test.exs 2>&1

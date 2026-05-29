@@ -2,6 +2,7 @@
 FROM hexpm/elixir:1.16.1-erlang-26.2.2-debian-bookworm-20240130 AS build
 
 RUN apt-get update -y && apt-get install -y build-essential git npm \
+    pkg-config libavformat-dev libavutil-dev \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 WORKDIR /app
@@ -27,6 +28,7 @@ RUN mix release
 FROM debian:bookworm-slim
 
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales ffmpeg \
+    libavformat59 libavutil57 \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
@@ -44,4 +46,4 @@ USER nobody
 
 EXPOSE 4000 1935
 
-CMD ["bin/computer_vision", "start"]
+CMD ["sh", "-c", "bin/computer_vision eval 'ComputerVision.Release.migrate()' && bin/computer_vision start"]

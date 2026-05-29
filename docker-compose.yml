@@ -5,7 +5,7 @@ services:
       - "4000:4000"
       - "1935:1935"
     environment:
-      - DATABASE_URL=ecto://postgres:postgres@db/computer_vision
+      - DATABASE_URL=ecto://postgres:${POSTGRES_PASSWORD:-postgres}@db/computer_vision
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - PHX_HOST=${PHX_HOST:-localhost}
       - PHX_SERVER=true
@@ -28,7 +28,7 @@ services:
     image: postgres:16-alpine
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - POSTGRES_DB=computer_vision
     volumes:
       - pg_data:/var/lib/postgresql/data
